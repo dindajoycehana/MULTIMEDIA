@@ -1,0 +1,801 @@
+\documentclass[11pt,a4paper]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%% Credit %%%%%%%%%%%%%%%%%%%%%%%%
+
+% template ini dibuat oleh martin.manullang@if.itera.ac.id untuk dipergunakan oleh seluruh sivitas akademik itera.
+
+%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGE starts HERE %%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{microtype}
+\captionsetup[table]{name=Tabel}
+\captionsetup[figure]{name=Gambar}
+\usepackage{tabulary}
+\usepackage{minted}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{placeins}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[all]{xy}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage[left=2cm,right=2cm,top=3cm,bottom=2.5cm]{geometry}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{psfrag}
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{beramono}
+% Enable inserting code into the document
+\usepackage{listings}
+\usepackage{xcolor} 
+% custom color & style for listing
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{LightGray}{gray}{0.9}
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{green},
+	keywordstyle=\color{codegreen},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
+\renewcommand{\lstlistingname}{Kode}
+%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGE ends HERE %%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Data Diri %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\student}{\textbf{Dinda Joycehana (122140048)}}
+\newcommand{\course}{\textbf{Sistem Teknologi Multimedia (IF25-40305)}}
+\newcommand{\assignment}{\textbf{Worksheet 1: Setup Python Environment untuk Multimedia}}
+
+%%%%%%%%%%%%%%%%%%% using theorem style %%%%%%%%%%%%%%%%%%%%
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{exa}[thm]{Example}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{coro}[thm]{Corollary}
+\newtheorem{quest}{Question}[section]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{lipsum}%% a garbage package you don't need except to create examples.
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Dinda Joycehana (122140048)}
+\rhead{ \thepage}
+\cfoot{\textbf{Worksheet 1: Setup Python Environment untuk Multimedia}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%%%%%%%%%%%%%%  Shortcut for usual set of numbers  %%%%%%%%%%%
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\setlength\headheight{14pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%555
+\begin{document}
+\thispagestyle{empty}
+\begin{center}
+	\includegraphics[scale = 0.15]{Figure/ifitera-header.png}
+	\vspace{0.1cm}
+\end{center}
+\noindent
+\rule{17cm}{0.2cm}\\[0.3cm]
+Nama: \student \hfill Tugas Ke: \assignment\\[0.1cm]
+Mata Kuliah: \course \hfill Tanggal: \today\\
+\rule{17cm}{0.05cm}
+\vspace{0.1cm}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BODY DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tujuan Pembelajaran}
+Setelah menyelesaikan worksheet ini, mahasiswa diharapkan mampu:
+\begin{itemize}
+    \item Memahami pentingnya manajemen environment Python untuk pengembangan multimedia
+    \item Menginstall dan mengkonfigurasi Python environment menggunakan conda, venv, atau uv
+    \item Menginstall library-library Python yang diperlukan untuk multimedia processing
+    \item Memverifikasi instalasi dengan mengimpor dan menguji library multimedia
+    \item Mendokumentasikan proses konfigurasi dan hasil pengujian dalam format \LaTeX
+\end{itemize}
+
+\section{Latar Belakang}
+Python telah menjadi bahasa pemrograman yang sangat populer untuk multimedia processing karena memiliki ekosistem library yang sangat kaya. Namun, untuk dapat bekerja dengan multimedia secara efektif, kita perlu mengatur environment Python dengan benar dan menginstall library-library yang tepat.
+
+Manajemen environment Python sangat penting untuk:
+\begin{itemize}
+    \item Menghindari konflik antar library (dependency conflict)
+    \item Memastikan reproducibility dari project
+    \item Memudahkan kolaborasi antar developer
+    \item Memisahkan project yang berbeda dengan requirement yang berbeda
+\end{itemize}
+
+\section{Instruksi Tugas}
+
+\subsection{Persiapan}
+\textbf{Sebelum memulai, pastikan Anda telah:}
+\begin{itemize}
+    \item Menginstall Python 3.8 atau lebih baru di sistem Anda
+    \item Memilih salah satu tool manajemen environment: \textbf{conda}, \textbf{venv}, atau \textbf{uv}
+    \item Membuka terminal/command prompt
+    \item Menyiapkan dokumen \LaTeX\ ini untuk dokumentasi
+\end{itemize}
+
+\subsection{Bagian 1: Membuat Environment Python}
+Pilih \textbf{SALAH SATU} dari tiga opsi berikut dan ikuti langkah-langkahnya:
+
+\subsubsection{Opsi 1: Menggunakan Conda (Direkomendasikan untuk pemula)}
+Jalankan perintah berikut di terminal:
+
+\begin{lstlisting}[language=bash, caption=Membuat environment dengan Conda]
+# Membuat environment baru dengan nama 'multimedia'
+conda create -n multimedia python=3.11
+
+# Mengaktifkan environment
+conda activate multimedia
+
+# Verifikasi environment aktif
+conda info --envs
+\end{lstlisting}
+
+\subsubsection{Opsi 2: Menggunakan venv (Built-in Python)}
+\begin{lstlisting}[language=bash, caption=Membuat environment dengan venv]
+# Membuat environment baru
+python3 -m venv multimedia-env
+
+# Mengaktifkan environment (Linux/Mac)
+source multimedia-env/bin/activate
+
+# Mengaktifkan environment (Windows)
+# multimedia-env\Scripts\activate
+
+# Verifikasi environment aktif
+which python
+\end{lstlisting}
+
+\subsubsection{Opsi 3: Menggunakan uv (Modern dan cepat)}
+\begin{lstlisting}[language=bash, caption=Membuat environment dengan uv]
+# Install uv terlebih dahulu jika belum ada
+# pip install uv
+
+# Membuat environment baru
+uv venv multimedia-uv
+
+# Mengaktifkan environment (Linux/Mac)
+source multimedia-uv/bin/activate
+
+# Mengaktifkan environment (Windows)
+# multimedia-uv\Scripts\activate
+
+# Verifikasi environment aktif
+which python
+\end{lstlisting}
+
+\textbf{Dokumentasikan di sini:}
+\begin{itemize}
+    \item Tool manajemen environment yang Anda pilih: \textbf{UV}
+    \item Screenshot atau copy-paste output dari perintah verifikasi environment
+\end{itemize}
+\begin{figure}
+\includegraphics[width=1\textwidth]{Figure/verifikasi_env.png}
+\end{figure}
+
+\subsection{Bagian 2: Instalasi Library Multimedia}
+Setelah environment aktif, install library-library berikut:
+
+\subsubsection{Library Audio Processing}
+\begin{lstlisting}[language=bash, caption=Instalasi library audio]
+# Untuk conda:
+conda install -c conda-forge librosa soundfile scipy
+
+# Untuk pip (venv/uv):
+pip install librosa soundfile scipy
+\end{lstlisting}
+
+\subsubsection{Library Image Processing}
+\begin{lstlisting}[language=bash, caption=Instalasi library image]
+# Untuk conda:
+conda install -c conda-forge opencv pillow scikit-image matplotlib
+
+# Untuk pip (venv/uv):
+pip install opencv-python pillow scikit-image matplotlib
+\end{lstlisting}
+
+\subsubsection{Library Video Processing}
+\begin{lstlisting}[language=bash, caption=Instalasi library video]
+# Untuk conda:
+conda install -c conda-forge ffmpeg
+pip install moviepy
+
+# Untuk pip (venv/uv):
+pip install moviepy
+\end{lstlisting}
+
+\subsubsection{Library General Purpose}
+\begin{lstlisting}[language=bash, caption=Instalasi library umum]
+# Untuk conda:
+conda install numpy pandas jupyter
+
+# Untuk pip (venv/uv):
+pip install numpy pandas jupyter
+\end{lstlisting}
+
+\textbf{Dokumentasikan di sini:}
+\begin{itemize}
+    \item Perintah instalasi yang Anda gunakan
+    \item Screenshot proses instalasi atau output sukses
+    \item Daftar library yang berhasil diinstall dengan versinya
+\end{itemize}
+\begin{lstlisting}[language=bash, caption=Instalasi library audio]
+# Library Audio Processing
+(Tugas1) PS C:\TUGAS KULIAH DINDA\MULTIMEDIA\Tugas1> uv pip install librosa soundfile scipy 
+Resolved 25 packages in 4.08s                                                                                                                                                     
+Prepared 9 packages in 6.97s
+Installed 25 packages in 4.73s
+ + audioread==3.0.1                                                                                                                                                               
+ + certifi==2025.8.3                                                                                                                                                              
+ + cffi==1.17.1                                                                                                                                                                   
+ + charset-normalizer==3.4.3                                                                                                                                                      
+ + decorator==5.2.1                                                                                                                                                               
+ + idna==3.10                                                                                                                                                                     
+ + joblib==1.5.2                                                                                                                                                                  
+ + lazy-loader==0.4                                                                                                                                                               
+ + librosa==0.11.0
+ + llvmlite==0.44.0
+ + msgpack==1.1.1
+ + numba==0.61.2
+ + numpy==2.2.6
+ + packaging==25.0
+ + platformdirs==4.4.0
+ + pooch==1.8.2
+ + pycparser==2.22
+ + requests==2.32.5
+ + scikit-learn==1.7.1
+ + scipy==1.15.3
+ + soundfile==0.13.1
+ + soxr==0.5.0.post1
+ + threadpoolctl==3.6.0
+ + typing-extensions==4.15.0
+ + urllib3==2.5.0
+(Tugas1) PS C:\TUGAS KULIAH DINDA\MULTIMEDIA\Tugas1> 
+\end{lstlisting}
+\begin{lstlisting}[language=bash, caption=Instalasi library image]
+# Library Image Processing
+(Tugas1) PS C:\TUGAS KULIAH DINDA\MULTIMEDIA\Tugas1> uv pip install opencv-python pillow scikit-image matplotlib
+Resolved 18 packages in 2.64s
+Prepared 8 packages in 34.17s
+Installed 14 packages in 2.29s
+ + contourpy==1.3.2                                                                                                                                                               
+ + cycler==0.12.1                                                                                                                                                                 
+ + fonttools==4.59.2                                                                                                                                                              
+ + imageio==2.37.0                                                                                                                                                                
+ + kiwisolver==1.4.9                                                                                                                                                              
+ + matplotlib==3.10.5                                                                                                                                                             
+ + networkx==3.4.2                                                                                                                                                                
+ + opencv-python==4.12.0.88
+ + pillow==11.3.0
+ + pyparsing==3.2.3
+ + python-dateutil==2.9.0.post0
+ + scikit-image==0.25.2
+ + six==1.17.0
+ + tifffile==2025.5.10
+\end{lstlisting}
+\begin{lstlisting}[language=bash, caption=Instalasi library video]
+# Library Video Processing
+(Tugas1) PS C:\TUGAS KULIAH DINDA\MULTIMEDIA\Tugas1> uv pip install moviepy
+Resolved 10 packages in 849ms
+Prepared 4 packages in 15.09s
+Installed 6 packages in 259ms
+ + colorama==0.4.6                                                                                                                                                                
+ + imageio-ffmpeg==0.6.0                                                                                                                                                          
+ + moviepy==2.2.1                                                                                                                                                                 
+ + proglog==0.1.12
+ + python-dotenv==1.1.1
+ + tqdm==4.67.1
+\end{lstlisting}
+\begin{lstlisting}[language=bash, caption=Instalasi library umum]
+# Library General Purpose
+(Tugas1) PS C:\TUGAS KULIAH DINDA\MULTIMEDIA\Tugas1> uv pip install numpy pandas jupyter
+Resolved 105 packages in 39.97s
+Prepared 31 packages in 26.46s
+Installed 90 packages in 13.18s
+ + anyio==4.10.0                                                                                                                                                                  
+ + argon2-cffi==25.1.0                                                                                                                                                            
+ + argon2-cffi-bindings==25.1.0                                                                                                                                                   
+ + arrow==1.3.0                                                                                                                                                                   
+ + asttokens==3.0.0                                                                                                                                                               
+ + async-lru==2.0.5                                                                                                                                                               
+ + attrs==25.3.0                                                                                                                                                                  
+ + babel==2.17.0                                                                                                                                                                  
+ + beautifulsoup4==4.13.5                                                                                                                                                         
+ + bleach==6.2.0                                                                                                                                                                  
+ + comm==0.2.3                                                                                                                                                                    
+ + debugpy==1.8.16                                                                                                                                                                
+ + defusedxml==0.7.1                                                                                                                                                              
+ + exceptiongroup==1.3.0                                                                                                                                                          
+ + executing==2.2.0                                                                                                                                                               
+ + fastjsonschema==2.21.2
+ + fqdn==1.5.1
+ + h11==0.16.0
+ + httpcore==1.0.9
+ + httpx==0.28.1
+ + ipykernel==6.30.1
+ + ipython==8.37.0
+ + ipywidgets==8.1.7
+ + isoduration==20.11.0
+ + jedi==0.19.2
+ + jinja2==3.1.6
+ + json5==0.12.1
+ + jsonpointer==3.0.0
+ + jsonschema==4.25.1
+ + jsonschema-specifications==2025.4.1
+ + jupyter==1.1.1
+ + jupyter-client==8.6.3
+ + jupyter-console==6.6.3
+ + jupyter-core==5.8.1
+ + jupyter-events==0.12.0
+ + jupyter-lsp==2.3.0
+ + jupyter-server==2.17.0
+ + jupyter-server-terminals==0.5.3
+ + jupyterlab==4.4.6
+ + jupyterlab-pygments==0.3.0
+ + jupyterlab-server==2.27.3
+ + jupyterlab-widgets==3.0.15
+ + lark==1.2.2
+ + markupsafe==3.0.2
+ + matplotlib-inline==0.1.7
+ + mistune==3.1.3
+ + nbclient==0.10.2
+ + nbconvert==7.16.6
+ + nbformat==5.10.4
+ + nest-asyncio==1.6.0
+ + notebook==7.4.5
+ + notebook-shim==0.2.4
+ + overrides==7.7.0
+ + pandas==2.3.2
+ + pandocfilters==1.5.1
+ + parso==0.8.5
+ + prometheus-client==0.22.1
+ + prompt-toolkit==3.0.52
+ + psutil==7.0.0
+ + pure-eval==0.2.3
+ + pygments==2.19.2
+ + python-json-logger==3.3.0
+ + pytz==2025.2
+ + pywin32==311
+ + pywinpty==3.0.0
+ + pyyaml==6.0.2
+ + pyzmq==27.0.2
+ + referencing==0.36.2
+ + rfc3339-validator==0.1.4
+ + rfc3986-validator==0.1.1
+ + rfc3987-syntax==1.1.0
+ + rpds-py==0.27.1
+ + send2trash==1.8.3
+ + setuptools==80.9.0
+ + sniffio==1.3.1
+ + soupsieve==2.8
+ + stack-data==0.6.3
+ + terminado==0.18.1
+ + tinycss2==1.4.0
+ + tomli==2.2.1
+ + tornado==6.5.2
+ + traitlets==5.14.3
+ + types-python-dateutil==2.9.0.20250822
+ + tzdata==2025.2
+ + uri-template==1.3.0
+ + wcwidth==0.2.13
+ + webcolors==24.11.1
+ + webencodings==0.5.1
+ + websocket-client==1.8.0
+ + widgetsnbextension==4.0.14
+(Tugas1) PS C:\TUGAS KULIAH DINDA\MULTIMEDIA\Tugas1> 
+\end{lstlisting}
+
+\subsection{Bagian 3: Verifikasi Instalasi}
+Buat file Python sederhana untuk menguji semua library yang telah diinstall:
+
+
+\textbf{Jalankan script dan dokumentasikan hasilnya:}
+
+\begin{lstlisting}[language=Python, caption=Script untuk verifikasi instalasi]
+# test script to verify installation of various libraries
+import sys
+import librosa
+import soundfile as sf
+import scipy
+import cv2
+from PIL import Image
+import skimage
+import matplotlib.pyplot as plt
+import moviepy as mpy
+import numpy as np
+import pandas as pd
+
+print("Libraries installed successfully!") 
+\end{lstlisting}
+
+\subsection{Bagian 4: Simple Test dengan Sample Code}
+Buat dan jalankan contoh sederhana untuk setiap kategori multimedia:
+
+\subsubsection{Test Audio Processing}
+\begin{lstlisting}[language=Python, caption=Test audio processing sederhana]
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate simple sine wave
+duration = 2  # seconds
+sample_rate = 44100
+frequency = 440  # A4 note
+
+t = np.linspace(0, duration, int(sample_rate * duration))
+audio_signal = np.sin(2 * np.pi * frequency * t)
+
+# Plot waveform
+plt.figure(figsize=(10, 4))
+plt.plot(t[:1000], audio_signal[:1000])  # Plot first 1000 samples
+plt.title('Sine Wave (440 Hz)')
+plt.xlabel('Time (s)')
+plt.ylabel('Amplitude')
+plt.grid(True)
+plt.savefig('sine_wave_test.png', dpi=150, bbox_inches='tight')
+plt.show()
+
+print(f"Generated {duration}s sine wave at {frequency}Hz")
+print(f"Sample rate: {sample_rate}Hz")
+print(f"Total samples: {len(audio_signal)}")
+\end{lstlisting}
+
+\subsubsection{Test Image Processing}
+\begin{lstlisting}[language=Python, caption=Test image processing sederhana]
+import numpy as np
+import matplotlib.pyplot as plt
+from PIL import Image
+
+# Create a simple test image
+width, height = 400, 300
+image = np.zeros((height, width, 3), dtype=np.uint8)
+
+# Add some patterns
+image[:, :width//3, 0] = 255  # Red section
+image[:, width//3:2*width//3, 1] = 255  # Green section
+image[:, 2*width//3:, 2] = 255  # Blue section
+
+# Add a white circle in the center
+center_x, center_y = width//2, height//2
+radius = 50
+Y, X = np.ogrid[:height, :width]
+mask = (X - center_x)**2 + (Y - center_y)**2 <= radius**2
+image[mask] = [255, 255, 255]
+
+# Display and save
+plt.figure(figsize=(8, 6))
+plt.imshow(image)
+plt.title('Test Image with RGB Stripes and White Circle')
+plt.axis('off')
+plt.savefig('test_image.png', dpi=150, bbox_inches='tight')
+plt.show()
+
+print(f"Created test image: {width}x{height} pixels")
+print(f"Image shape: {image.shape}")
+print(f"Image dtype: {image.dtype}")
+\end{lstlisting}
+
+\textbf{Dokumentasikan hasil eksekusi:}
+\begin{itemize}
+    \item Screenshot output dari kedua script di atas
+    \item Gambar yang dihasilkan (sine\_wave\_test.png dan test\_image.png)
+    \item Error message jika ada dan cara mengatasinya
+\end{itemize}
+
+\section{Bagian Laporan}
+
+\subsection{Output Verifikasi Instalasi}
+\textbf{Copy-paste output lengkap dari script \texttt{test\_multimedia.py} di sini:}
+
+\begin{lstlisting}[caption=Output verifikasi instalasi]
+(Tugas1) PS C:\TUGAS KULIAH DINDA\MULTIMEDIA\Tugas1> python test_multimedia.py
+Libraries installed successfully!
+Generated 2s sine wave at 440Hz
+Sample rate: 44100Hz
+Total samples: 88200
+Created test image: 400x300 pixels
+Image shape: (300, 400, 3)
+Image dtype: uint8
+(Tugas1) PS C:\TUGAS KULIAH DINDA\MULTIMEDIA\Tugas1>
+\end{lstlisting}
+
+\subsection{Screenshot Hasil Test}
+\textbf{Sisipkan screenshot atau gambar hasil dari:}
+\begin{itemize}
+    \item Terminal/command prompt yang menunjukkan environment aktif
+    \item Output dari script test audio (sine wave plot)
+    \item Output dari script test image (RGB stripes dengan circle)
+\end{itemize}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figure/env_active.png}
+    \caption{Output dari verifikasi environment}
+    \label{fig:env_verification}
+\end{figure}
+\begin{figure}[ht]
+    \centering 
+    \includegraphics[width=0.8\textwidth]{Figure/sine_wave_test.png}
+    \caption{Output dari test audio processing}
+    \label{fig:sine_wave}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Figure/test_image.png}
+    \caption{Output dari test image processing}
+    \label{fig:test_image}
+\end{figure}
+
+\textit{Gunakan perintah \textbackslash\texttt{includegraphics} untuk menyisipkan gambar}
+
+\subsection{Analisis dan Refleksi}
+\textbf{Jawab pertanyaan berikut:}
+
+\begin{enumerate}
+    \item \textbf{Mengapa penting menggunakan environment terpisah untuk project multimedia?}
+    
+    \textit{Karena setiap project multimedia bisa saja memiliki kebutuhan library dan versi yang berbeda-beda. Sehingga dibutuhkan environment terpisah di setiap project agar tidak terjadi konflik antar library.}
+    
+    \item \textbf{Apa perbedaan utama antara conda, venv, dan uv? Mengapa Anda memilih tool yang Anda gunakan?}
+    \begin{itemize} 
+        \item \textit{Conda adalah package manager sekaligus environment manager yang mendukung berbagai bahasa pemrograman. Karena bisa multilangues, sehingga populer digunakan dalam data science dan machine learning. Namun conda sizenya lebih besar dan lebih lambat dalam depedency resolution.}
+        \item \textit{Sedangkan venv, ini merupakan modul bawaan python dalam membuat virtual environment. Venv lebih ringan dan cepat, namun hanya mendukung package dari python saja.}
+        \item \textit{UV mirip dengan venv, hanya saja lebih cepat dan praktis. UV bisa membuat virual environment sekaligus instalasi package python dengan sangat cepat. uv juga mendukung uv.lock untuk reproducibility. Saya memilih uv karena lebih ringan dan cepat dibanding conda, serta memiliki fitur yang lebih baik dibanding venv.}
+    \end{itemize}
+    
+    \item \textbf{Library mana yang paling sulit diinstall dan mengapa?}
+    
+    \textit{Sejauh ini selama percobaan tidak ada library yang sulit diinstall. Semua library berhasil diinstall dengan lancar.}
+    
+    \item \textbf{Bagaimana cara mengatasi masalah dependency conflict jika terjadi?}
+    
+    \textit{Dari saya pribadi, cara mengatasi masalah dependency conflict adalah dengan membuat folder dengan environment baru. Tapi bisa juga dengan menginstal library beserta versinya agar menghindari ketidakcocokan versi. Jika projectnya mirip, mungkin bisa menggunakan requiement.txt yang sama.}
+    
+    \item \textbf{Jelaskan fungsi dari masing-masing library yang berhasil Anda install!}
+    \begin{enumerate}
+        \item \textit{Audio Processing Libraries:}
+        \begin{itemize}
+        \item \textit{Librosa: library untuk analisis dan pemrosesan audio, seperti ekstraksi fitur, transformasi sinyal, dan visualisasi spektrum.}
+        \item \textit{Soundfile: library untuk membaca dan menulis file audio dalam berbagai format.}
+        \item \textit{Scipy: library untuk komputasi ilmiah. Dipakai untuk filtering, resampling dan transformasi sinyal.}
+        \end{itemize}
+        \item \textit{Image Processing Libraries:}
+        \begin{itemize}
+            \item \textit{OpenCV: library untuk pemrosesan gambar dan video, seperti deteksi objek, pengenalan wajah, dan transformasi geometris.}
+            \item \textit{Pillow: library untuk manipulasi gambar, seperti pembacaan, penulisan, dan transformasi gambar.}
+            \item \textit{Scikit-image: library untuk pemrosesan gambar, seperti segmentasi, deteksi tepi, dan transformasi morfologi.}
+        \end{itemize}
+        \item \textit{Video Processing Libraries:}
+        \begin{itemize}
+            \item \textit{Moviepy: library untuk pemrosesan video, seperti pemotongan, penggabungan, dan penambahan efek pada video.}
+        \end{itemize}
+        \item \textit{General Purpose Libraries:}
+        \begin{itemize}
+            \item \textit{Matplotlib: library untuk membuat grafik dan visualisasi data.}
+            \item \textit{Pandas: library untuk manipulasi dan analisis data, seperti pembacaan dan manipulasi data CSV dan Excel.} 
+            \item \textit{Numpy: library untuk komputasi numerik, seperti operasi pada array dan matriks.}  
+            \item \textit{Jupyter: library untuk membuat dan berbagi dokumen interaktif yang berisi kode, visualisasi, dan teks.}
+        \end{itemize}
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{Troubleshooting}
+\textbf{Dokumentasikan masalah yang Anda hadapi (jika ada) dan cara mengatasinya:}
+
+    \begin{itemize}
+    \item \textbf{Masalah:} \textit{Tidak bisa mengatur foto dan caption di latex}
+    
+    \textbf{Solusi:} \textit{Bertanya pada GPT. Ternyata pakai \textbackslash{}begin\{figure\}, dan \textbackslash{}caption, \textbackslash{}label. Jika mau center maka menggunakan \textbackslash{}centering. Terkadang fotonya berada di luar margin, jadi harus diatur widthnya.}
+    \end{itemize}
+
+
+\section{Export Environment untuk Reproduksi}
+Sebagai langkah terakhir, export environment Anda agar dapat direproduksi:
+
+\subsection{Untuk Conda}
+\begin{lstlisting}[language=bash, caption=Export conda environment]
+conda env export > environment.yml
+\end{lstlisting}
+
+\subsection{Untuk venv/uv}
+\begin{lstlisting}[language=bash, caption=Export pip requirements]
+pip freeze > requirements.txt
+\end{lstlisting}
+
+\textbf{Copy-paste isi file environment.yml atau requirements.txt di sini:}
+
+\begin{lstlisting}[caption=Environment/Requirements file]
+#isi file requirements.txt (untuk uv)
+anyio==4.10.0
+argon2-cffi==25.1.0
+argon2-cffi-bindings==25.1.0
+arrow==1.3.0
+asttokens==3.0.0
+async-lru==2.0.5
+attrs==25.3.0
+audioread==3.0.1
+babel==2.17.0
+beautifulsoup4==4.13.5
+bleach==6.2.0
+certifi==2025.8.3
+cffi==1.17.1
+charset-normalizer==3.4.3
+colorama==0.4.6
+comm==0.2.3
+contourpy==1.3.2
+cycler==0.12.1
+debugpy==1.8.16
+decorator==5.2.1
+defusedxml==0.7.1
+exceptiongroup==1.3.0
+executing==2.2.0
+fastjsonschema==2.21.2
+fonttools==4.59.2
+fqdn==1.5.1
+h11==0.16.0
+httpcore==1.0.9
+httpx==0.28.1
+idna==3.10
+imageio==2.37.0
+imageio-ffmpeg==0.6.0
+ipykernel==6.30.1
+ipython==8.37.0
+ipywidgets==8.1.7
+isoduration==20.11.0
+jedi==0.19.2
+jinja2==3.1.6
+joblib==1.5.2
+json5==0.12.1
+jsonpointer==3.0.0
+jsonschema==4.25.1
+jsonschema-specifications==2025.4.1
+jupyter==1.1.1
+jupyter-client==8.6.3
+jupyter-console==6.6.3
+jupyter-core==5.8.1
+jupyter-events==0.12.0
+jupyter-lsp==2.3.0
+jupyter-server==2.17.0
+jupyter-server-terminals==0.5.3
+jupyterlab==4.4.6
+jupyterlab-pygments==0.3.0
+jupyterlab-server==2.27.3
+jupyterlab-widgets==3.0.15
+kiwisolver==1.4.9
+lark==1.2.2
+lazy-loader==0.4
+librosa==0.11.0
+llvmlite==0.44.0
+markupsafe==3.0.2
+matplotlib==3.10.5
+matplotlib-inline==0.1.7
+mistune==3.1.3
+moviepy==2.2.1
+msgpack==1.1.1
+nbclient==0.10.2
+nbconvert==7.16.6
+nbformat==5.10.4
+nest-asyncio==1.6.0
+networkx==3.4.2
+notebook==7.4.5
+notebook-shim==0.2.4
+numba==0.61.2
+numpy==2.2.6
+opencv-python==4.12.0.88
+overrides==7.7.0
+packaging==25.0
+pandas==2.3.2
+pandocfilters==1.5.1
+parso==0.8.5
+pillow==11.3.0
+platformdirs==4.4.0
+pooch==1.8.2
+proglog==0.1.12
+prometheus-client==0.22.1
+prompt-toolkit==3.0.52
+psutil==7.0.0
+pure-eval==0.2.3
+pycparser==2.22
+pygments==2.19.2
+pyparsing==3.2.3
+python-dateutil==2.9.0.post0
+python-dotenv==1.1.1
+python-json-logger==3.3.0
+pytz==2025.2
+pywin32==311
+pywinpty==3.0.0
+pyyaml==6.0.2
+pyzmq==27.0.2
+referencing==0.36.2
+requests==2.32.5
+rfc3339-validator==0.1.4
+rfc3986-validator==0.1.1
+rfc3987-syntax==1.1.0
+rpds-py==0.27.1
+scikit-image==0.25.2
+scikit-learn==1.7.1
+scipy==1.15.3
+send2trash==1.8.3
+setuptools==80.9.0
+six==1.17.0
+sniffio==1.3.1
+soundfile==0.13.1
+soupsieve==2.8
+soxr==0.5.0.post1
+stack-data==0.6.3
+terminado==0.18.1
+threadpoolctl==3.6.0
+tifffile==2025.5.10
+tinycss2==1.4.0
+tomli==2.2.1
+tornado==6.5.2
+tqdm==4.67.1
+traitlets==5.14.3
+types-python-dateutil==2.9.0.20250822
+typing-extensions==4.15.0
+tzdata==2025.2
+uri-template==1.3.0
+urllib3==2.5.0
+wcwidth==0.2.13
+webcolors==24.11.1
+webencodings==0.5.1
+websocket-client==1.8.0
+widgetsnbextension==4.0.14
+\end{lstlisting}
+
+\section{Kesimpulan}
+\textbf{Tuliskan kesimpulan Anda mengenai:}
+\begin{itemize}
+    \item Pengalaman setup Python environment untuk multimedia
+    \newline
+    \textit{Tidak ada kesulitan yang berarti selama proses setup. Semua library berhasil diinstall dengan lancar menggunakan uv. Hanya saja, ada beberapa perintah pada modul latihan yang tidak sesuai dengan uv, sehingga saya harus menyesuaikan perintahnya. Contoh pada instalasi library, pada uv seharusnya menggunakan "uv pip install ..." bukan "pip install ...". Kasihan teman-teman yang belum tahu uv, pasti bingung kenapa tidak bisa.}
+    \item Persiapan untuk project multimedia selanjutnya
+    \newline
+    \textit{Karena semua depedencies telah diefinisikan pada requirements.txt, maka untuk project multimedia selanjutnya saya hanya perlu membuat environment baru dengan uv, lalu menginstall semua library yang ada di requirements.txt. Sepertinya itu sudah cukup untuk memulai project multimedia.}
+    \item Saran untuk mahasiswa lain yang akan melakukan setup serupa
+    \newline
+    \textit{Saran saya pakai uv saja karena lebih ringan dan cepat serta mudah untuk reproducibility. Jangan lupa dokumentasikan semua langkahnya, karena itu penting untuk referensi di masa depan.}
+\end{itemize}
+
+\section{Referensi}
+Sertakan referensi yang Anda gunakan selama proses setup dan troubleshooting.
+
+\newpage
+\bibliographystyle{IEEEtran}
+\bibliography{Referensi}
+\href{https://chatgpt.com/share/68b1371d-844c-8008-a1ef-9929fc0ed9b0}{Link ChatGPT Referensi}
+\end{document}
