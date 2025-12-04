@@ -52,3 +52,4 @@ python 122140048.py
 - Pencahayaan harus cukup (tidak terlalu gelap/red).
 - Tunggu 5 detik hingga buffer terkumpul (progress bar).
 - BPM akan muncul secara otomatis.
+- Klik q jika ingin leave/meninggalkan meet
